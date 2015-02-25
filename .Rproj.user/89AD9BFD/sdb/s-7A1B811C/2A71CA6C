@@ -1,0 +1,16 @@
+{
+    "contents" : "exportPattern(\"^[[:alpha:]]+\")\n",
+    "created" : 1424819479834.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4116331488",
+    "id" : "2A71CA6C",
+    "lastKnownWriteTime" : 1424819470,
+    "path" : "~/workspace/R/Packages/totebag/NAMESPACE",
+    "project_path" : "NAMESPACE",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_namespace"
+}

@@ -1,0 +1,15 @@
+Package: totebag
+Type: Package
+Title: Implementation of Ensemble Forward Selection
+Version: 0.01
+License: MIT License
+Date: 2015-02-24
+Author: Vincent Alexander Saulys
+Maintainer: Vincent Alexander Saulys <vincent.saulys@mail.mcgill.ca>
+Description: Inspired by Rich Caruana's "Ensemble Selection from Libraries of Models",
+	     this is an implementation of it. Currently it only support regressions and 
+	     no preprocessing on the data, I have plans to change this. Also looking to 
+	     rewrite some of or all of it in Rcpp. Right now, the best models are determined
+       by way of accuracy metric, this will also be exapnded to other metrics.
+Suggests:
+	caret

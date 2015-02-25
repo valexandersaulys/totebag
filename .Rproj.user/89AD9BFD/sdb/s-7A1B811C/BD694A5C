@@ -1,0 +1,16 @@
+{
+    "contents" : "Package: totebag\nType: Package\nTitle: Implementation of Ensemble Forward Selection\nVersion: 0.01\nLicense: MIT License\nDate: 2015-02-24\nAuthor: Vincent Alexander Saulys\nMaintainer: Vincent Alexander Saulys <vincent.saulys@mail.mcgill.ca>\nDescription: Inspired by Rich Caruana's \"Ensemble Selection from Libraries of Models\",\n\t     this is an implementation of it. Currently it only support regressions and \n\t     no preprocessing on the data, I have plans to change this. Also looking to \n\t     rewrite some of or all of it in Rcpp. Right now, the best models are determined\n       by way of accuracy metric, this will also be exapnded to other metrics.\nSuggests:\n\tcaret\n",
+    "created" : 1424819477643.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3437098219",
+    "id" : "BD694A5C",
+    "lastKnownWriteTime" : 1424828116,
+    "path" : "~/workspace/R/Packages/totebag/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}
