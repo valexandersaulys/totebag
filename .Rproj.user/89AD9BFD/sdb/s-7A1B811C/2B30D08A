@@ -1,12 +1,12 @@
 {
-    "contents" : "data(iris)\nsubset <- iris[iris$Species=='setosa',]\nsubset$Species <- NULL\n\n# First add linear model\n# Then RandomForest\n# Then Adaboost\n\nlibrary(stats) # for glm()\nlibrary(randomForest) # for rf()\nlibrary(ada) # for ada()\n\n# No paranethesis on the function name\nparams.ada <- list(loss='exponential',type='real')\nparams.rf <- list(ntree=499)\nparams.lm <- list()\n\n# Our generated data\nset.seed(10)  \ny<-c(1:1000)  \nx1<-c(1:1000)*runif(1000,min=0,max=2)  \nx2<-(c(1:1000)*runif(1000,min=0,max=2))^2  \nx3<-log(c(1:1000)*runif(1000,min=0,max=2)) \nlm_formula <- y ~ x1 + x2 + x3\n\nlm_fit<-lm()  \nsummary(lm_fit)  ",
+    "contents" : "data(iris)\nsubset <- iris[iris$Species=='setosa',]\nsubset$Species <- NULL\n\n# First add linear model\n# Then RandomForest\n# Then Adaboost\n\nlibrary(stats) # for glm()\nlibrary(randomForest) # for rf()\nlibrary(ada) # for ada()\n\n# No paranethesis on the function name\nparams.ada <- list(loss='exponential',type='real')\nparams.rf <- list(ntree=499)\nparams.lm <- list()\n\n# Our generated data\nset.seed(10)  \ny<-c(1:1000)  \nx1<-c(1:1000)*runif(1000,min=0,max=2)  \nx2<-(c(1:1000)*runif(1000,min=0,max=2))^2  \nx3<-log(c(1:1000)*runif(1000,min=0,max=2)) \nlm_formula <- y ~ x1 + x2 + x3\n",
     "created" : 1424826154495.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3705820661",
+    "hash" : "3322588253",
     "id" : "2B30D08A",
-    "lastKnownWriteTime" : 1424827557,
+    "lastKnownWriteTime" : 1424828555,
     "path" : "~/workspace/R/Packages/totebag/sample.R",
     "project_path" : "sample.R",
     "properties" : {

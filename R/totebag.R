@@ -1,5 +1,9 @@
 # TO-DO:
 # --> Enable other metrics than accuracy to be usedas measurements when doing ensembles
+# --> Rewrite when possible in C/C++
+# --> Add classification support
+# --> Add support for weighting models and/or some algorithm
+# --> To use models without formulas
 
 # Needed libraries -> library(caret) for createDataPartition() function
 
@@ -45,8 +49,10 @@ new.totebag <- function (x, y,
     hillclimb=hillclimb, # to make sure all models are validated on the same validation data
     models=list(),       # holds the library of models
     model.args=list(),   # their corresponding model params
+    model.pred.args=list(), # holds prediction preds for models
+    models.finalized=list(), # holds the trained models
     y.preds=list(),      # the predicted y values on hillclimb
-    asm=list()           # their corresponding accuracy scores
+    asm=list()           # their corresponding accuracy/error scores
   );
   
   class(object) <- 'totebag';
@@ -102,11 +108,13 @@ add.totebag <- function(object,model,train.params,pred.params,formula) {
     current.model <- do.call(as.character(model),c(formula,data=object$training,train.params))
     current.predictions <- do.call(command, c(formula,newdata=object$hillcimb,pred.params))
     
-    object$y.preds <- current.predictions
+    object$models.finalized[[to.be.added]] <- current.model
+    object$y.preds[[to.be.added]] <- current.predictions
+    
     if (type=='classification') {
-      object$asm <- confusionMatrix(data=current.predictions,reference=hillclimb)$overall
+      object$asm[[to.be.added]] <- confusionMatrix(data=current.predictions,reference=hillclimb)$overall
     } else {# if (type=="regression") {  # Defaults to regression
-      object$asm <- (1 - mean(error.totebag(current.predictions,hillclimb)))
+      object$asm[[to.be.added]] <- (1 - mean(error.totebag(current.predictions,hillclimb)))
     } 
   } 
 }
@@ -132,7 +140,9 @@ predict.totebag <- function(object,
 #' @param newdata
 #' @param percentage
 bagged.pred.totebag <- function(object, newdata, percentage) {
-   
+  
+  avg.predictions <- matrix(data=NA,nrow=nrow(newdata),ncol=object$k)
+  
   for (i in 1:object$k) {
       best.model <- list()
       newdata <- as.matrix(newdata);
@@ -164,8 +174,24 @@ bagged.pred.totebag <- function(object, newdata, percentage) {
               if (temp.acc > ACC) { mlocs = temp.locs; ACC = temp.acc; } # if its better, replace!
         }
       }
+      
+      # For holding all of our final predictions
+      final.predictions <- matrix(data=NA,nrow=length(newdata),ncol=length(l.locs));
+      running.predictions <- matrix(data=NA,nrow=length(newdata),ncol=1);
+      
+      for (i in 1:length(best.models)) {
+        g <- mlocs[[i]];
+        command <- object$models.finalized[[g]];
+        final.predictions[,i] <- do.call('predict',c(command,newdata,object$model.pred.args[[g]]));
+        # It might be good to have a running part here that can add together values and add weighting
+      }
+      
+      # For now, a very rough averaging of the rows
+      avg.predictions[,i] <-  rowMeans(final.predictions)
   }
 
+  # return the average of all predictions from bagging
+  return(rowMeans(avg.predictions))
 }
 
 #' Only meant for internal package use. Totebag prediction without bagged selection.
@@ -227,6 +253,6 @@ reg.pred.totebag <- function(object, l.locs) {
 #' @param true.vals list of true values
 #' @param pred.vals list of predicted values
 error.totebag <- function(pred.vals,true.vals) {
-  error <- sqrt(sum((true.vals - pred.vals)^2))
+  error <- (true.vals - pred.vals)^2
   return(error)
 }

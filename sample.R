@@ -22,6 +22,3 @@ x1<-c(1:1000)*runif(1000,min=0,max=2)
 x2<-(c(1:1000)*runif(1000,min=0,max=2))^2  
 x3<-log(c(1:1000)*runif(1000,min=0,max=2)) 
 lm_formula <- y ~ x1 + x2 + x3
-
-lm_fit<-lm()  
-summary(lm_fit)  
