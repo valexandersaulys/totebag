@@ -9,9 +9,9 @@ An implementation of Forward Ensemble Selection, particularly as shown in Caraua
 
 To-Do
 ------
- > Enable other metrics than accuracy to be usedas measurements when doing ensembles
- > Rewrite when possible in C/C++
- > Add classification support
- > Add support for weighting models and/or some algorithm
- > To use models without formulas
- > Neural Network Compression (Possibly through another package?)
+- Enable other metrics than accuracy to be usedas measurements when doing ensembles
+- Rewrite when possible in C/C++
+- Add classification support
+- Add support for weighting models and/or some algorithm
+- To use models without formulas
+- Neural Network Compression (Possibly through another package?)
